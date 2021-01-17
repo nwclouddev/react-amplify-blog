@@ -24,8 +24,8 @@ class CreatePost extends Component {
 
         })
 
-        console.log("Curr: User: ", user.username);
-        console.log("Attr.Sub: User: ", user.attributes.sub);
+        // console.log("Curr: User: ", user.username);
+        // console.log("Attr.Sub: User: ", user.attributes.sub);
       })
 
 
