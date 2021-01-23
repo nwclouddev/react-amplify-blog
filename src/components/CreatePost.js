@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { API, graphqlOperation, Auth } from 'aws-amplify'
 import { createPost } from '../graphql/mutations'
 
-
-
-
 class CreatePost extends Component {
 
   state = {
@@ -23,14 +20,10 @@ class CreatePost extends Component {
           postOwnerUsername: user.username
 
         })
-
         // console.log("Curr: User: ", user.username);
         // console.log("Attr.Sub: User: ", user.attributes.sub);
       })
-
-
   }
-
 
   handleChangePost = event => this.setState({ 
     [event.target.name] : event.target.value
@@ -51,10 +44,8 @@ class CreatePost extends Component {
 
     this.setState({ postTitle: "", postBody: ""})
 
-
   }
 
-  
   render() {
     return (
       <form className="add-post"
@@ -82,8 +73,6 @@ class CreatePost extends Component {
         <input type="Submit"
           className="btn"
           style={{ fontSize: '19px'}}/>
-
-
       </form>
     )
   }
