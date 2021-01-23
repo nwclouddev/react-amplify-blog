@@ -9,12 +9,21 @@ body {
   color: #282c34;
 }
 
+.logout-ui {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 9px 7px #36181833;
+
+  padding: .5rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.App {
+.App, .Nav__navBar___xtCFA {
     max-width: 900px;
     margin: 2rem auto 0 auto;
     padding: 1rem;
@@ -24,6 +33,10 @@ code {
     color: #282c34
     
 }
+
+/* .Button__button___vS7Mv {
+  color: rgba(9, 123, 216, 0.808);
+} */
 
 .container {
   padding: 0 1rem;
@@ -136,15 +149,17 @@ div {
 }
 
 .close{
-  width:40px;
-  border-radius: 150px;
+  width:50px;
+  border-radius: 5px;
   float: right;
+
 }
 input,textarea{
   margin: .3rem;
   padding: 1rem;
   font-size: 1.2rem;
 }
+
 button{
   width:30%;
   background-color: rgb(49, 142, 248);
