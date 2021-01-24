@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa'
 import { Auth } from 'aws-amplify'
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
 class TitleNavBar extends Component{
 
@@ -39,7 +40,8 @@ class TitleNavBar extends Component{
           <Nav className="ml-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">About</Nav.Link>
-            <NavDropdown 
+            <NavDropdown
+              className="ml-auto" 
               title={
                   <div style={{ display: 'inline-block' }}> 
                     <FaUser /> {this.state.ownerUsername}
@@ -50,7 +52,7 @@ class TitleNavBar extends Component{
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4"><AmplifySignOut/></NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

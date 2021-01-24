@@ -188,8 +188,8 @@ class DisplayPosts extends Component {
       return (
         <div>
           <br/>
-          <Card>
-            <div className="posts" style={ rowStyle } key= { post.id }>
+          <Card className="posts">
+            <div style={ rowStyle } key= { post.id }>
               <h1>{ post.postTitle }</h1>
               <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
 
@@ -249,7 +249,7 @@ class DisplayPosts extends Component {
 }
 
 const rowStyle = {
-  background: '#f4f4f4',
+  // background: '#f4f4f4',
   padding: '10px',
   border: '1px #ccc',
   margin: '14px'

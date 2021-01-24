@@ -14,8 +14,8 @@ function App() {
       <span>
         <TitleNavBar />
         <br />
-        <Container>
-          <Card>
+        <Container className="app-body">
+          <Card className="add-post">
             <CreatePost />
           </Card>
           <DisplayPosts />

@@ -51,7 +51,7 @@ class CreatePost extends Component {
     return (
       <Container>
         <br/>
-        <Form className="add-post"
+        <Form
           onSubmit={this.handleAddPost}>
           <Form.Group>
           <Form.Control
@@ -78,7 +78,7 @@ class CreatePost extends Component {
               onChange={this.handleChangePost}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className="col-12" variant="success" type="submit">
             Submit
           </Button>
         </Form>
