@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import { FaUser } from 'react-icons/fa'
+import { FaUser, FaBeer } from 'react-icons/fa'
 import { Auth } from 'aws-amplify'
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
@@ -34,7 +34,12 @@ class TitleNavBar extends Component{
   render () {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Adam's Blog</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <FaBeer 
+            style={{color: "gold"}}
+          />
+          {" "}
+          Adam's Blog</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">

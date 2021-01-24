@@ -191,19 +191,20 @@ class DisplayPosts extends Component {
           <Card className="posts">
             <div style={ rowStyle } key= { post.id }>
               <h1>{ post.postTitle }</h1>
-              <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
-
-                { "Posted by: "} { post.postOwnerUsername }
-
-                {" on "}
-                <time style={{ fontStyle: "italic" }}>
-                  {" "}
-                  {new Date(post.createdAt).toDateString()}
-                </time>
-
-              </span>
-              <p>{ post.postBody }</p>
-              <br/>
+              <p>
+                { post.postBody }
+                <br/>
+                <span style={{ fontStyle: "italic", color: "cornflowerblue" }}>
+                  <small>
+                    { "Posted by: "} { post.postOwnerUsername }
+                    {" on "}
+                    <time style={{ fontStyle: "italic" }}>
+                      {" "}
+                      {new Date(post.createdAt).toDateString()}
+                    </time>
+                  </small>
+                </span>
+              </p>
               <span>
                 {post.postOwnerId === loggedInUser &&
                   <DeletePost data={post} />
