@@ -1,19 +1,25 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import DisplayPosts from './components/DisplayPosts';
 import CreatePost from './components/CreatePost';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import "@aws-amplify/ui/dist/style.css";
+import TitleNavBar from './components/TitleNavBar';
+import { Container, Card } from 'react-bootstrap'
 function App() {
   return (
 
     <div className="App">
-      <span class="logout-ui">
-        <AmplifySignOut/>
-      </span>
       <span>
-        <CreatePost />
-        <DisplayPosts />
+        <TitleNavBar />
+        <br />
+        <Container>
+          <Card>
+            <CreatePost />
+          </Card>
+          <DisplayPosts />
+        </Container>
       </span>
     </div>
   );

@@ -44,6 +44,8 @@ class CreateCommentPost extends Component {
         <form className="add-comment"
         onSubmit={this.handleAddComment}>
           <textarea
+          className="comment-box"
+          style={{maxWidth: "100%"}}
           type="text"
           name="content"
           rows="3"

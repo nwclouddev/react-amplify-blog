@@ -87,7 +87,8 @@ class EditPost extends Component{
             <button>Update Post</button>
           </form>
         </div>
-      )}
+      )
+      }
         <button onClick={this.handleModal}>Edit</button>
       </>
     )
