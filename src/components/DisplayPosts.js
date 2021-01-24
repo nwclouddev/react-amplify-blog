@@ -6,10 +6,11 @@ import EditPost from './EditPost'
 import CreateCommentPost from './CreateCommentPost'
 import CommentPost from './CommentPost'
 import UsersWhoLikedPost from './UsersWhoLikedPost'
-
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { onCreatePost, onDeletePost, onUpdatePost, onCreateComment, onCreateLike } from '../graphql/subscriptions'
 import { createLike } from '../graphql/mutations'
-import { FaSadTear, FaThumbsUp } from 'react-icons/fa'
+import { FaSadTear, FaThumbsUp, FaUser } from 'react-icons/fa'
+import { Card } from 'react-bootstrap'
 
 class DisplayPosts extends Component {
 
@@ -185,57 +186,62 @@ class DisplayPosts extends Component {
     return posts.map(( post ) => {
 
       return (
-        <div className="posts" style={ rowStyle } key= { post.id }>
-          <h1>{ post.postTitle }</h1>
-          <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
-
-            { "Wrote by: "} { post.postOwnerUsername }
-
-            {" on "}
-            <time style={{ fontStyle: "italic" }}>
-              {" "}
-              {new Date(post.createdAt).toDateString()}
-            </time>
-
-          </span>
-          <p>{ post.postBody }</p>
+        <div>
           <br/>
-          <span>
-            {post.postOwnerId === loggedInUser &&
-              <DeletePost data={post} />
-            }
-            {post.postOwnerId === loggedInUser &&
-              <EditPost {...post} />
-            }
+          <Card>
+            <div className="posts" style={ rowStyle } key= { post.id }>
+              <h1>{ post.postTitle }</h1>
+              <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
 
-            <span>
-              <p className="alert">{post.postOwnerId === loggedInUser && this.state.errorMessage}</p>
-              <p onMouseEnter={ () => this.handleMouseHover(post.id)}
-                onMouseLeave={() => this.handleMouseHoverLeave()}
-                onClick={() => this.handleLike(post.id)}
-                style={{color: (post.likes.items.length) > 0 ? "blue": "gray"}}
-                className="like-button">
-                <FaThumbsUp/>
-                {post.likes.items.length}
-              </p>
-              {
-                this.state.isHovering &&
-                <div className="users-liked">
-                  {this.state.postLikedBy.length === 0 ? 
-                    " Liked by no one " : "Liked by: "}
-                  {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
-                </div>
-              }
-            </span>
-          </span>
-          <span>
-            <CreateCommentPost postId={post.id} />
-              { post.comments.items.length > 0 && <span style={{fontSize:"19px", color:"gray"}}>
-                Comments: </span>}
-                {
-                  post.comments.items.map((comment, index) => <CommentPost key={index} commentData={comment} />)
+                { "Posted by: "} { post.postOwnerUsername }
+
+                {" on "}
+                <time style={{ fontStyle: "italic" }}>
+                  {" "}
+                  {new Date(post.createdAt).toDateString()}
+                </time>
+
+              </span>
+              <p>{ post.postBody }</p>
+              <br/>
+              <span>
+                {post.postOwnerId === loggedInUser &&
+                  <DeletePost data={post} />
                 }
-          </span>
+                {post.postOwnerId === loggedInUser &&
+                  <EditPost {...post} />
+                }
+
+                <span>
+                  <p className="alert">{post.postOwnerId === loggedInUser && this.state.errorMessage}</p>
+                  <p onMouseEnter={ () => this.handleMouseHover(post.id)}
+                    onMouseLeave={() => this.handleMouseHoverLeave()}
+                    onClick={() => this.handleLike(post.id)}
+                    style={{color: (post.likes.items.length) > 0 ? "blue": "gray"}}
+                    className="like-button">
+                    <FaThumbsUp/>
+                    {post.likes.items.length}
+                  </p>
+                  {
+                    this.state.isHovering &&
+                    <div className="users-liked">
+                      {this.state.postLikedBy.length === 0 ? 
+                        " Liked by no one " : "Liked by: "}
+                      {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
+                    </div>
+                  }
+                </span>
+              </span>
+              <span>
+                <CreateCommentPost postId={post.id} />
+                  { post.comments.items.length > 0 && <span style={{fontSize:"19px", color:"gray"}}>
+                    Comments: </span>}
+                    {
+                      post.comments.items.map((comment, index) => <CommentPost key={index} commentData={comment} />)
+                    }
+              </span>
+            </div>
+          </Card>
         </div>
       )
     })
