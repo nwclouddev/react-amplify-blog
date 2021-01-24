@@ -6,14 +6,11 @@ import EditPost from './EditPost'
 import CreateCommentPost from './CreateCommentPost'
 import CommentPost from './CommentPost'
 import UsersWhoLikedPost from './UsersWhoLikedPost'
-import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { onCreatePost, onDeletePost, onUpdatePost, onCreateComment, onCreateLike } from '../graphql/subscriptions'
 import { createLike } from '../graphql/mutations'
-import { FaSadTear, FaThumbsUp, FaUser } from 'react-icons/fa'
+import { FaSadTear, FaThumbsUp } from 'react-icons/fa'
 import { Card } from 'react-bootstrap'
-
 class DisplayPosts extends Component {
-
   state = {
     ownerId: "",
     ownerUsername: "",
@@ -25,7 +22,6 @@ class DisplayPosts extends Component {
 
   componentDidMount = async () => {
     this.getPosts()
-
     await Auth.currentUserInfo()
       .then(user => {
         this.setState(
@@ -212,7 +208,6 @@ class DisplayPosts extends Component {
                 {post.postOwnerId === loggedInUser &&
                   <EditPost {...post} />
                 }
-
                 <span>
                   <p className="alert">{post.postOwnerId === loggedInUser && this.state.errorMessage}</p>
                   <p onMouseEnter={ () => this.handleMouseHover(post.id)}

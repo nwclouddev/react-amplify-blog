@@ -6,7 +6,9 @@ import CreatePost from './components/CreatePost';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import "@aws-amplify/ui/dist/style.css";
 import TitleNavBar from './components/TitleNavBar';
-import { Container, Card } from 'react-bootstrap'
+import PageFooter from './components/PageFooter';
+import { Container, Card } from 'react-bootstrap';
+
 function App() {
   return (
 
@@ -19,6 +21,7 @@ function App() {
             <CreatePost />
           </Card>
           <DisplayPosts />
+          <PageFooter/>
         </Container>
       </span>
     </div>
