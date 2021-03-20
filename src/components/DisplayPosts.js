@@ -9,7 +9,7 @@ import UsersWhoLikedPost from './UsersWhoLikedPost'
 import { onCreatePost, onDeletePost, onUpdatePost, onCreateComment, onCreateLike } from '../graphql/subscriptions'
 import { createLike } from '../graphql/mutations'
 import { FaSadTear, FaThumbsUp } from 'react-icons/fa'
-import { Card } from 'react-bootstrap'
+import { Card, Tooltip, OverlayTrigger, Button } from 'react-bootstrap'
 class DisplayPosts extends Component {
   state = {
     ownerId: "",
@@ -205,6 +205,7 @@ class DisplayPosts extends Component {
                 {post.postOwnerId === loggedInUser &&
                   <DeletePost data={post} />
                 }
+                {" "}
                 {post.postOwnerId === loggedInUser &&
                   <EditPost {...post} />
                 }
@@ -220,10 +221,33 @@ class DisplayPosts extends Component {
                   </p>
                   {
                     this.state.isHovering &&
-                    <div className="users-liked">
-                      {this.state.postLikedBy.length === 0 ? 
-                        " Liked by no one " : "Liked by: "}
-                      {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
+
+                    <div className="users-liked" id={this.id}>
+                      <>
+                        {['auto'].map((placement) => (
+                          <OverlayTrigger
+                            key={placement}
+                            placement={placement}
+                            overlay={
+                              <Tooltip id={`tooltip-${placement}`}>
+                                Tooltip on <strong>{placement}</strong>.
+                              </Tooltip>
+                            }
+                          >
+                            <Button variant="secondary">
+                            {this.state.postLikedBy.length === 0 ? 
+                              " Liked by no one " : "Liked by: "}
+                            {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
+                            </Button>
+                          </OverlayTrigger>
+                        ))}
+                      </>
+                      {/* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        {this.state.postLikedBy.length === 0 ? 
+                          " Liked by no one " : "Liked by: "}
+                        {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
+                      </button> */}
+
                     </div>
                   }
                 </span>
