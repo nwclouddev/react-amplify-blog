@@ -6,8 +6,8 @@ class CommentPost extends Component {
     const { content, commentOwnerUsername, createdAt} = this.props.commentData
       return (
         <div className="comment">
+          <hr/>
           <p>
-            <hr/>
             { content }
             <br />
           <span style={{ fontStyle: "italic", color: "cornflowerblue"}}>

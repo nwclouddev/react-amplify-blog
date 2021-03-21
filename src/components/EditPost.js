@@ -1,11 +1,43 @@
 import { Auth, API, graphqlOperation } from 'aws-amplify'
-import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import React, { Component, useState } from 'react'
+import { Button, Modal } from 'react-bootstrap'
 
 import { updatePost } from '../graphql/mutations'
 
+function FormModal() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Edit
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>TODO: Insert form</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
 
 class EditPost extends Component{
+
+  
 
   state = {
     show: false,
@@ -64,6 +96,7 @@ class EditPost extends Component{
   render() {
     return (
       <>
+
       { this.state.show && (
         <div className="modal">
           <button className="close"
@@ -91,9 +124,7 @@ class EditPost extends Component{
       )
       }
         {/* <button onClick={this.handleModal}>Edit</button> */}
-        <Button onClick= {this.handleModal} variant="primary">
-          Edit
-        </Button>
+        <FormModal />
       </>
     )
   }

@@ -1,5 +1,6 @@
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { Component } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import { createComment } from '../graphql/mutations'
 
 class CreateCommentPost extends Component {
@@ -41,28 +42,24 @@ class CreateCommentPost extends Component {
   render() {
     return (
       <div>
-        <form className="add-comment"
-        onSubmit={this.handleAddComment}>
-          <textarea
-          className="comment-box"
-          style={{maxWidth: "100%"}}
-          type="text"
-          name="content"
-          rows="3"
-          cols="40"
-          required
-          placeholder="Add Your Comment..."
-          value={this.state.content}
-          onChange={this.handleChangeContent}/>
-          
-          <input
-          className="btn"
-          type="submit"
-          style={{ fontSize: '19px'}}
-          value="Add Comment"/>
-
-
-        </form>
+        <Form>
+          <Form.Group>
+          <Form.Control 
+            as="textarea"
+            type="text"
+            name="content"
+            rows="3"
+            cols="40"
+            required
+            placeholder="Add Your Comment..."
+            value={this.state.content}
+            onChange={this.handleChangeContent}          
+            />
+          </Form.Group>
+          <Button className="col-2" variant="success" type="submit">
+            Add Comment
+          </Button>
+        </Form>
       </div>
     )
   }

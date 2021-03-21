@@ -18,7 +18,7 @@ class DeletePost extends Component {
         const post = this.props.data
          return (
             //  <button onClick= { () => this.handleDeletePost(post.id) }>Delete</button>
-             <Button onClick= { () => this.handleDeletePost(post.id) } variant="danger">
+             <Button onClick= { () => this.handleDeletePost(post.id) } variant="danger" data-confirm="Are you sure?">
                 Delete
             </Button>
          )

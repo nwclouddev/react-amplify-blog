@@ -9,7 +9,7 @@ import UsersWhoLikedPost from './UsersWhoLikedPost'
 import { onCreatePost, onDeletePost, onUpdatePost, onCreateComment, onCreateLike } from '../graphql/subscriptions'
 import { createLike } from '../graphql/mutations'
 import { FaSadTear, FaThumbsUp } from 'react-icons/fa'
-import { Card, Tooltip, OverlayTrigger, Button } from 'react-bootstrap'
+import { Card, OverlayTrigger, Tooltip, Col } from 'react-bootstrap'
 class DisplayPosts extends Component {
   state = {
     ownerId: "",
@@ -182,10 +182,10 @@ class DisplayPosts extends Component {
     return posts.map(( post ) => {
 
       return (
-        <div>
+        <div key= { post.id }>
           <br/>
           <Card className="posts">
-            <div style={ rowStyle } key= { post.id }>
+            <div style={ rowStyle } >
               <h1>{ post.postTitle }</h1>
               <p>
                 { post.postBody }
@@ -209,48 +209,29 @@ class DisplayPosts extends Component {
                 {post.postOwnerId === loggedInUser &&
                   <EditPost {...post} />
                 }
-                <span>
+                <Col sm={2}>
                   <p className="alert">{post.postOwnerId === loggedInUser && this.state.errorMessage}</p>
-                  <p onMouseEnter={ () => this.handleMouseHover(post.id)}
-                    onMouseLeave={() => this.handleMouseHoverLeave()}
-                    onClick={() => this.handleLike(post.id)}
-                    style={{color: (post.likes.items.length) > 0 ? "cornflowerblue": "gray"}}
-                    className="like-button">
-                    <FaThumbsUp/>
-                    {post.likes.items.length}
-                  </p>
-                  {
-                    this.state.isHovering &&
-
-                    <div className="users-liked" id={this.id}>
-                      <>
-                        {['auto'].map((placement) => (
-                          <OverlayTrigger
-                            key={placement}
-                            placement={placement}
-                            overlay={
-                              <Tooltip id={`tooltip-${placement}`}>
-                                Tooltip on <strong>{placement}</strong>.
-                              </Tooltip>
-                            }
-                          >
-                            <Button variant="secondary">
-                            {this.state.postLikedBy.length === 0 ? 
-                              " Liked by no one " : "Liked by: "}
-                            {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
-                            </Button>
-                          </OverlayTrigger>
-                        ))}
-                      </>
-                      {/* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                        {this.state.postLikedBy.length === 0 ? 
-                          " Liked by no one " : "Liked by: "}
-                        {this.state.postLikedBy.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
-                      </button> */}
-
-                    </div>
-                  }
-                </span>
+                  <OverlayTrigger
+                    overlay={
+                      <Tooltip id={`tooltip-users-liked`} className="users-liked">
+                        <div className="users-liked">
+                          {post.likes.items.length === 0 ? 
+                            " Liked by no one " : "Liked by: "}
+                          {post.likes.items.length === 0 ? <FaSadTear /> : <UsersWhoLikedPost data={this.state.postLikedBy} /> }
+                        </div>
+                      </Tooltip>
+                    }
+                  >
+                    <p onClick={() => this.handleLike(post.id)}
+                      onMouseEnter={ () => this.handleMouseHover(post.id)}
+                      onMouseLeave={ () => this.handleMouseHoverLeave()}
+                      style={{color: (post.likes.items.length) > 0 ? "cornflowerblue": "gray"}}
+                      className="like-button">
+                      <FaThumbsUp/>
+                      {" " + post.likes.items.length}
+                    </p>
+                  </OverlayTrigger>
+                </Col>
               </span>
               <span>
                 <CreateCommentPost postId={post.id} />
